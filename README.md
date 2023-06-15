@@ -36,15 +36,20 @@ docker run -d --name backend-B -h backend-B nginxdemos/hello:plain-text
 docker exec -it backend-A sh
 ip addr add 192.168.25.10/24 dev lo
 ```
-Similar steps are taken on the baclend-B container. In this case, clients will use the VIP 192.168.10.25 to access the requested service via the load balancer.
+Similar steps are taken on the baclend-B container. In this case, the VIP is hardcoded to 192.168.10.25, which will be used by clients to access the requested service through the load balancer.
 
-## Set up client
-
+## Set up a client container
+1. Run a client container based on the latest curl docker.
+```
 docker run -d --name curlclient -h curlclient curlimages/curl:latest sleep infinity
+```
+2. Add a host route to the the VIP 192.168.10.25/32 via the load balancer at 172.17..2.
+```
+docker exec -it curlclient sh
+ip route add 192.168.25.10/32 via 172.17.0.2
 ```
 
 ## Test it out
-The load balancer is hardcoded to the IP 172.17.0.2.
 1. Issue a curl command from the curl client to the load balancer in a loop.
 ```
 docker exec -it curlclient sh
