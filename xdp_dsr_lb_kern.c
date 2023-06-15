@@ -1,13 +1,5 @@
 #include "xdp_dsr_lb_kern.h"
 
-#define IP_ADDRESS(x) (unsigned int)(172 + (17 << 8) + (0 << 16) + (x << 24))
-#define VIP_ADDRESS(x) (unsigned int)(192 + (168 << 8) + (25 << 16) + (x << 24))
-
-#define LB 2
-#define BACKEND_A 3
-#define BACKEND_B 4
-#define VIP 10
-
 struct five_tuple {
     __u8  protocol;
     __u32 ip_source;
