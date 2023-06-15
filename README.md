@@ -1,6 +1,6 @@
 # XDP_DSR_Load_Balancer
 ## Introduction
-The XDP code for direct server return is simplier than the previous one, https://github.com/snpsuen/XDP_Stateful_Load_Balancer. Our contribution is to provide some basic stateful elements for it to redirect packets belonging to the same TCP connection consistently.
+The XDP code for direct server return is simplier than the one from https://github.com/snpsuen/XDP_Stateful_Load_Balancer. Our contribution is to provide some basic stateful elements for it to redirect packets belonging to the same TCP connection consistently.
 * A forward table to send the traffic of a TCP connection toward a chosen backend server via DNAT.
 * A return table to bring the traffic of a TCP connection back to the requesting client via SNAT.
 ## Build the load balancer
