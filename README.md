@@ -1,6 +1,6 @@
 # XDP_DSR_Load_Balancer
 ## Introduction
-The XDP code for direct server return is simplier than the one of https://github.com/snpsuen/XDP_Stateful_Load_Balancer. First, it  does not process any return packets. In additon, there is no change to IP addresses. Only MAC addresses will be modified to transmit Ethernet frames from the load balancer to the backends.
+The XDP code for direct server return is simplier than that of https://github.com/snpsuen/XDP_Stateful_Load_Balancer. First, it  does not process any return packets. In additon, there is no change to IP addresses. Only MAC addresses will be modified to transmit Ethernet frames from the load balancer to the backends.
 ## Build the load balancer
 The whole end-to-end set up is to be done in the Killercoda online lab, https://killercoda.com/. The simple load balancer wil be hardcoded to dispatch requests randomly to two backend servers at known IP and MAC addresses.
 1. Pull a pre-built eBPF/XDP ready docker to run a container as the platform of the load balancer.
