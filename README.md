@@ -36,7 +36,7 @@ docker run -d --name backend-B -h backend-B nginxdemos/hello:plain-text
 docker exec -it backend-A sh
 ip addr add 192.168.25.10/24 dev lo
 ```
-Similar steps are taken on the baclend-B container. In this case, the VIP is hardcoded to 192.168.10.25, which will be used by clients to access the requested service through the load balancer.
+Similar steps are taken on the backend-B container. In this case, the VIP is hardcoded to 192.168.10.25, which will be used by clients to access the requested service through the load balancer.
 
 ## Set up a client container
 1. Run a client container based on the latest curl docker.
