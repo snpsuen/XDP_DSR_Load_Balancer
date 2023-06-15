@@ -79,6 +79,8 @@ int xdp_dsr_load_balancer(struct xdp_md *ctx) {
         bpf_printk("Returning XDP_TX ...");
         return XDP_TX;
     }
+    
+    return XDP_PASS;
 }
 
 char _license[] SEC("license") = "GPL";
