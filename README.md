@@ -20,7 +20,7 @@ make
 ls /sys/fs/bpf
 ip addr show eth0
 ```
-4. Open a terminal to the host of the container and display the on-going eBPF/XDP kernel traces in real time.
+4. Open a terminal to the host of the container and trace the on-going eBPF/XDP kernel mesages in real time.
 ```
 sudo cat /sys/kernel/debug/tracing/trace_pipe
 ```
