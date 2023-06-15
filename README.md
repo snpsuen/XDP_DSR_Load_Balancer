@@ -1,6 +1,6 @@
 # XDP_DSR_Load_Balancer
 ## Introduction
-The XDP code for direct server return is simplier than the one from https://github.com/snpsuen/XDP_Stateful_Load_Balancer. First, it  does not process any return packets. In additon, there is no change to IP addresses. Only MAC addresses will be modified to transmit Ethernet frames from the load balancer to the backends.
+The XDP code for direct server return is simplier than the one of https://github.com/snpsuen/XDP_Stateful_Load_Balancer. First, it  does not process any return packets. In additon, there is no change to IP addresses. Only MAC addresses will be modified to transmit Ethernet frames from the load balancer to the backends.
 ## Build the load balancer
 The whole end-to-end set up is to be done in the Killercoda online lab, https://killercoda.com/. The simple load balancer wil be hardcoded to dispatch requests randomly to two backend servers at known IP and MAC addresses.
 1. Pull a pre-built eBPF/XDP ready docker to run a container as the platform of the load balancer.
@@ -8,10 +8,10 @@ The whole end-to-end set up is to be done in the Killercoda online lab, https://
 docker run -d --privileged --name simplelb -h simplelb snpsuen/ebpfxdp:v05
 docker exec -it simplelb bash
 ```
-2. Download this repo, XDP_Stateful_Load_Balancer.
+2. Download this repo, XDP_DSR_Load_Balancer.
 ```
 cd /var/tmp
-git clone https://github.com/snpsuen/XDP_Stateful_Load_Balancer.git
+git clone https://github.com/snpsuen/XDP_DSR_Load_Balancer.git
 ```
 3. Build and attach the load balancer to eth0.
 ```
@@ -25,14 +25,21 @@ ip addr show eth0
 sudo cat /sys/kernel/debug/tracing/trace_pipe
 ```
 
-## Deploy backend servers and client
+## Set up backend servers
 1. Run a pair of backend servers on the nginx hello docker.
 ```
 docker run -d --name backend-A -h backend-A nginxdemos/hello:plain-text
 docker run -d --name backend-B -h backend-B nginxdemos/hello:plain-text
 ```
-2. Run a curl client container on the curlimages docker.
+2. Login to each backend containers and assign a given virtual IP (VIP) as an alias address to the loopback interface.
 ```
+docker exec -it backend-A sh
+ip addr add 192.168.25.10/24 dev lo
+```
+Similar steps are taken on the baclend-B container. In this case, clients will use the VIP 192.168.10.25 to access the requested service via the load balancer.
+
+## Set up client
+
 docker run -d --name curlclient -h curlclient curlimages/curl:latest sleep infinity
 ```
 
