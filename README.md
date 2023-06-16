@@ -8,7 +8,7 @@ The whole end-to-end set up is to be done in the Killercoda online lab, https://
 docker run -d --privileged --name simplelb -h simplelb snpsuen/ebpfxdp:v05
 docker exec -it simplelb bash
 ```
-2. Download this repo, XDP_DSR_Load_Balancer.
+2. Download this repo, XDP_DSR_Load_Balancer, to simplelb.
 ```
 cd /var/tmp
 git clone https://github.com/snpsuen/XDP_DSR_Load_Balancer.git
