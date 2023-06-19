@@ -66,8 +66,8 @@ int xdp_dsr_load_balancer(struct xdp_md *ctx) {
             bpf_map_update_elem(&forward_flow, &forward_key, &backend, BPF_ANY);  
         }
         else {
-            bpf_printk("Located backend %x from an existing entry in the forward flow table ", IP_ADDRESS(*forward_backend));
             backend = *forward_backend;
+            bpf_printk("Located backend %x from an existing entry in the forward flow table ", IP_ADDRESS(backend));
         }
         
         bpf_printk("Packet to be forwrded to backend %x", IP_ADDRESS(backend));        
