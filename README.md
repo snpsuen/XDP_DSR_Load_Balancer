@@ -28,8 +28,8 @@ sudo cat /sys/kernel/debug/tracing/trace_pipe
 ## Set up backend servers
 1. Run a pair of backend servers on the nginx hello docker.
 ```
-docker run -d --name backend-A -h backend-A nginxdemos/hello:plain-text
-docker run -d --name backend-B -h backend-B nginxdemos/hello:plain-text
+docker run -d --privileged --name backend-A -h backend-A nginxdemos/hello:plain-text
+docker run -d --privileged --name backend-B -h backend-B nginxdemos/hello:plain-text
 ```
 2. Login to each backend containers and assign a given virtual IP (VIP) as an alias address to the loopback interface.
 ```
@@ -41,7 +41,7 @@ Similar steps are taken on the backend-B container. In this case, the VIP is har
 ## Set up a client container
 1. Run a client container based on the latest curl docker.
 ```
-docker run -d --name curlclient -h curlclient curlimages/curl:latest sleep infinity
+docker run -d --privileged --name curlclient -h curlclient curlimages/curl:latest sleep infinity
 ```
 2. Add a host route to the the VIP 192.168.10.25/32 via the load balancer at 172.17.0.2.
 ```
