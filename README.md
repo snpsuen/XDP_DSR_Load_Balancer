@@ -45,7 +45,7 @@ docker run -d --privileged --name curlclient -h curlclient curlimages/curl:lates
 ```
 2. Add a host route to the the VIP 192.168.10.25/32 via the load balancer at 172.17.0.2.
 ```
-docker exec -it curlclient sh
+docker exec -it -u root curlclient sh
 ip route add 192.168.25.10/32 via 172.17.0.2
 ```
 
